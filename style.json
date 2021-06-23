@@ -128,12 +128,32 @@
       },
       "paint": {
         "line-color": "#9e9cab",
-        "line-width": 1,
-        "line-blur": 0.4
+        "line-dasharray": [
+          3,
+          1,
+          1,
+          1
+        ],
+        "line-width": {
+          "base": 1.4,
+          "stops": [
+            [
+              4,
+              0.4
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              12,
+              2
+            ]
+          ]
+        }
       }
     },
-
-{
+    {
       "id": "oc-water-name-ocean",
       "type": "symbol",
       "source": "oceanus",
@@ -175,9 +195,10 @@
         "text-letter-spacing": 0.2
       },
       "paint": {
-        "text-color": "#74aee9",
-        "text-halo-width": 1.5,
-        "text-halo-color": "rgba(255,255,255,0.7)"
+        "text-halo-blur": 1,
+        "text-color": "#FFFFFF",
+        "text-halo-width": 2,
+        "text-halo-color": "#000000"
       }
     },
     {
@@ -313,9 +334,7 @@
         "text-halo-color": "rgba(255,255,255,0.7)"
       }
     },
-
-
-{
+    {
       "id": "oc-label-country",
       "type": "symbol",
       "source": "oceanus",
@@ -333,26 +352,31 @@
         "text-font": [
           "Noto Sans Regular"
         ],
-        "text-size": 14,
-        "text-field": [
-          "to-string",
-          [
-            "get",
-            "name"
+        "text-field": "{name}",
+        "text-size": {
+          "stops": [
+            [
+              1,
+              11
+            ],
+            [
+              4,
+              17
+            ]
           ]
-        ],
-        "text-max-width": 8,
+        },
+        "text-transform": "uppercase",
+        "text-max-width": 6.25,
         "visibility": "visible"
       },
       "paint": {
-        "text-color": "rgba(102, 102, 102, 1)",
-        "text-halo-width": 1.2,
-        "text-halo-color": "rgba(255,255,255,0.8)"
+        "text-halo-blur": 1,
+        "text-color": "#FFFFFF",
+        "text-halo-width": 2,
+        "text-halo-color": "#000000"
       }
     },
-
-
-{
+    {
       "id": "oc-label-pref-ja",
       "type": "symbol",
       "source": "oceanus",
@@ -379,20 +403,20 @@
           "Noto Sans Regular"
         ],
         "text-size": 14,
-        "text-field": [
-          "to-string",
-          [
-            "get",
-            "name"
-          ]
-        ],
+        "text-field": "{name}",
         "text-max-width": 8,
+        "text-offset": [
+          0.4,
+          0
+        ],
+        "icon-size": 0.8,
+        "text-anchor": "left",
         "visibility": "visible"
       },
       "paint": {
-        "text-color": "rgba(102, 102, 102, 1)",
+        "text-color": "#FFFFFF",
         "text-halo-width": 1.2,
-        "text-halo-color": "rgba(255,255,255,0.8)"
+        "text-halo-color": "#000000"
       }
     },
     {
@@ -425,20 +449,20 @@
           "Noto Sans Regular"
         ],
         "text-size": 14,
-        "text-field": [
-          "to-string",
-          [
-            "get",
-            "name"
-          ]
-        ],
+        "text-field": "{name}",
         "text-max-width": 8,
+        "text-offset": [
+          0.4,
+          0
+        ],
+        "icon-size": 0.8,
+        "text-anchor": "left",
         "visibility": "visible"
       },
       "paint": {
-        "text-color": "rgba(102, 102, 102, 1)",
+        "text-color": "#FFFFFF",
         "text-halo-width": 1.2,
-        "text-halo-color": "rgba(255,255,255,0.8)"
+        "text-halo-color": "#000000"
       }
     },
     {
@@ -485,10 +509,9 @@
         "text-max-width": 9
       },
       "paint": {
-        "text-halo-blur": 0.5,
-        "text-color": "#666",
-        "text-halo-width": 1,
-        "text-halo-color": "#ffffff"
+        "text-color": "#FFFFFF",
+        "text-halo-width": 1.2,
+        "text-halo-color": "#000000"
       }
     },
     {
@@ -538,10 +561,9 @@
         "text-max-width": 9
       },
       "paint": {
-        "text-halo-blur": 0.5,
-        "text-color": "#666",
-        "text-halo-width": 1,
-        "text-halo-color": "#ffffff"
+        "text-color": "#FFFFFF",
+        "text-halo-width": 1.2,
+        "text-halo-color": "#000000"
       }
     },
     {
@@ -2510,6 +2532,7 @@
       "type": "line",
       "source": "geolonia",
       "source-layer": "boundary",
+      "minzoom": 8,
       "maxzoom": 14,
       "filter": [
         "all",
@@ -2714,6 +2737,7 @@
       "type": "symbol",
       "source": "geolonia",
       "source-layer": "water_name",
+      "minzoom": 8,
       "filter": [
         "all",
         [
@@ -3164,6 +3188,7 @@
       "type": "symbol",
       "source": "geolonia",
       "source-layer": "place",
+      "minzoom": 8,
       "filter": [
         "==",
         "class",
@@ -3225,6 +3250,7 @@
       "type": "symbol",
       "source": "geolonia",
       "source-layer": "place",
+      "minzoom": 8,
       "filter": [
         "all",
         [
@@ -3257,47 +3283,6 @@
       "paint": {
         "text-color": "#FFFFFF",
         "text-halo-width": 1.2,
-        "text-halo-color": "#000000"
-      }
-    },
-    {
-      "id": "place-country",
-      "type": "symbol",
-      "source": "geolonia",
-      "source-layer": "place",
-      "filter": [
-        "all",
-        [
-          "==",
-          "class",
-          "country"
-        ]
-      ],
-      "layout": {
-        "text-font": [
-          "Noto Sans Regular"
-        ],
-        "text-field": "{name}",
-        "text-size": {
-          "stops": [
-            [
-              1,
-              11
-            ],
-            [
-              4,
-              17
-            ]
-          ]
-        },
-        "text-transform": "uppercase",
-        "text-max-width": 6.25,
-        "visibility": "visible"
-      },
-      "paint": {
-        "text-halo-blur": 1,
-        "text-color": "#FFFFFF",
-        "text-halo-width": 2,
         "text-halo-color": "#000000"
       }
     },
