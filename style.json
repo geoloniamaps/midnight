@@ -9,7 +9,11 @@
     },
     "geolonia": {
       "type": "vector",
-      "url": "https://api.geolonia.com/v2/sources?key=YOUR-API-KEY"
+      "url": "https://tileserver.geolonia.com/v2/tiles.json?key=YOUR-API-KEY"
+    },
+    "geolonia-water": {
+      "type": "vector",
+      "url": "https://tileserver.geolonia.com/water/tiles.json?key=YOUR-API-KEY"
     }
   },
   "sprite": "https://sprites.geolonia.com/basic-white",
@@ -23,10 +27,53 @@
       }
     },
     {
-      "id": "water",
+      "id": "water-river-lake-ja",
       "type": "fill",
       "source": "geolonia",
       "source-layer": "water",
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "rgba(1, 17, 44, 1)"
+      }
+    },
+    {
+      "id": "geolonia-water-ocean",
+      "type": "fill",
+      "source": "geolonia-water",
+      "source-layer": "water",
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "rgba(1, 17, 44, 1)"
+      }
+    },
+    {
+      "id": "oc-ocean200",
+      "type": "fill",
+      "source": "oceanus",
+      "source-layer": "oc-water",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "get",
+            "class"
+          ],
+          "ocean"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "subclass"
+          ],
+          200
+        ]
+      ],
       "layout": {
         "visibility": "visible"
       },
@@ -76,7 +123,6 @@
       "source": "oceanus",
       "source-layer": "oc-boundary",
       "minzoom": 5,
-      "maxzoom": 8,
       "filter": [
         "all",
         [
