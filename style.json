@@ -345,9 +345,10 @@
         "text-letter-spacing": 0.2
       },
       "paint": {
-        "text-color": "#74aee9",
-        "text-halo-width": 1.5,
-        "text-halo-color": "rgba(255,255,255,0.7)"
+        "text-halo-blur": 1,
+        "text-color": "#FFFFFF",
+        "text-halo-width": 2,
+        "text-halo-color": "#000000"
       }
     },
     {
@@ -1239,32 +1240,6 @@
             ]
           ]
         }
-      }
-    },
-    {
-      "id": "ferry",
-      "type": "line",
-      "source": "geolonia",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        [
-          "in",
-          "class",
-          "ferry"
-        ]
-      ],
-      "layout": {
-        "line-join": "round",
-        "visibility": "visible"
-      },
-      "paint": {
-        "line-color": "rgba(108, 159, 182, 1)",
-        "line-width": 1.1,
-        "line-dasharray": [
-          2,
-          2
-        ]
       }
     },
     {
