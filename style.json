@@ -3,9 +3,17 @@
   "name": "Geolonia Midnight",
   "metadata": {},
   "sources": {
+    "oceanus": {
+      "type": "vector",
+      "url": "https://tileserver.geolonia.com/oceanus/tiles.json?key=YOUR-API-KEY"
+    },
     "geolonia": {
       "type": "vector",
-      "url": "https://api.geolonia.com/v1/sources?key=YOUR-API-KEY"
+      "url": "https://tileserver.geolonia.com/v2/tiles.json?key=YOUR-API-KEY"
+    },
+    "geolonia-water": {
+      "type": "vector",
+      "url": "https://tileserver.geolonia.com/water/tiles.json?key=YOUR-API-KEY"
     }
   },
   "sprite": "https://sprites.geolonia.com/basic-white",
@@ -16,6 +24,563 @@
       "type": "background",
       "paint": {
         "background-color": "rgba(19, 28, 54, 1)"
+      }
+    },
+    {
+      "id": "water",
+      "type": "fill",
+      "source": "geolonia-water",
+      "source-layer": "water",
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "rgba(1, 17, 44, 1)"
+      }
+    },
+    {
+      "id": "water-river-lake-ja",
+      "type": "fill",
+      "source": "geolonia",
+      "source-layer": "water",
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "rgba(1, 17, 44, 1)"
+      }
+    },
+    {
+      "id": "oc-boundary-land-level-1-ja",
+      "type": "line",
+      "source": "oceanus",
+      "source-layer": "oc-boundary",
+      "minzoom": 5,
+      "maxzoom": 8,
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "get",
+            "admin_level"
+          ],
+          1
+        ],
+        [
+          "has",
+          "jflag"
+        ]
+      ],
+      "layout": {
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#9e9cab",
+        "line-dasharray": [
+          3,
+          1,
+          1,
+          1
+        ],
+        "line-width": 1
+      }
+    },
+    {
+      "id": "oc-boundary-land-level-1",
+      "type": "line",
+      "source": "oceanus",
+      "source-layer": "oc-boundary",
+      "minzoom": 5,
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "get",
+            "admin_level"
+          ],
+          1
+        ],
+        [
+          "==",
+          [
+            "has",
+            "jflag"
+          ],
+          false
+        ]
+      ],
+      "layout": {
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#9e9cab",
+        "line-dasharray": [
+          3,
+          1,
+          1,
+          1
+        ],
+        "line-width": 1
+      }
+    },
+    {
+      "id": "oc-boundary-land-level-0",
+      "type": "line",
+      "source": "oceanus",
+      "source-layer": "oc-boundary",
+      "filter": [
+        "==",
+        [
+          "get",
+          "admin_level"
+        ],
+        0
+      ],
+      "layout": {
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#9e9cab",
+        "line-dasharray": [
+          3,
+          1,
+          1,
+          1
+        ],
+        "line-width": {
+          "base": 1.4,
+          "stops": [
+            [
+              4,
+              0.4
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              12,
+              2
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "oc-water-name-ocean",
+      "type": "symbol",
+      "source": "oceanus",
+      "source-layer": "oc-water_name",
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "geometry-type"
+          ],
+          "Point"
+        ],
+        [
+          "==",
+          [
+            "get",
+            "class"
+          ],
+          "ocean"
+        ]
+      ],
+      "layout": {
+        "text-font": [
+          "Noto Sans Regular"
+        ],
+        "text-size": 14,
+        "text-field": [
+          "to-string",
+          [
+            "get",
+            "name"
+          ]
+        ],
+        "text-max-width": 5,
+        "text-rotation-alignment": "map",
+        "symbol-placement": "point",
+        "symbol-spacing": 350,
+        "text-letter-spacing": 0.2
+      },
+      "paint": {
+        "text-halo-blur": 1,
+        "text-color": "#FFFFFF",
+        "text-halo-width": 2,
+        "text-halo-color": "#000000"
+      }
+    },
+    {
+      "id": "oc-water-name-other",
+      "type": "symbol",
+      "source": "oceanus",
+      "source-layer": "oc-water",
+      "minzoom": 6,
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "geometry-type"
+          ],
+          "Polygon"
+        ],
+        [
+          "has",
+          "name"
+        ]
+      ],
+      "layout": {
+        "text-font": [
+          "Noto Sans Regular"
+        ],
+        "text-size": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          0,
+          10,
+          6,
+          14
+        ],
+        "text-field": [
+          "to-string",
+          [
+            "get",
+            "name"
+          ]
+        ],
+        "text-max-width": 5,
+        "text-rotation-alignment": "map",
+        "symbol-placement": "point",
+        "symbol-spacing": 350,
+        "text-letter-spacing": 0.2,
+        "visibility": "visible"
+      },
+      "paint": {
+        "text-color": "#FFFFFF",
+        "text-halo-width": 1.5,
+        "text-halo-color": "#000000"
+      }
+    },
+    {
+      "id": "nt-water-name-ocean",
+      "type": "symbol",
+      "source": "oceanus",
+      "source-layer": "nt-water-name",
+      "minzoom": 8,
+      "filter": [
+        "==",
+        [
+          "get",
+          "class"
+        ],
+        "ocean"
+      ],
+      "layout": {
+        "text-font": [
+          "Noto Sans Regular"
+        ],
+        "text-size": 14,
+        "text-field": [
+          "to-string",
+          [
+            "get",
+            "name"
+          ]
+        ],
+        "text-max-width": 5,
+        "text-rotation-alignment": "map",
+        "symbol-placement": "point",
+        "symbol-spacing": 350,
+        "text-letter-spacing": 0.2
+      },
+      "paint": {
+        "text-halo-blur": 1,
+        "text-color": "#FFFFFF",
+        "text-halo-width": 2,
+        "text-halo-color": "#000000"
+      }
+    },
+    {
+      "id": "nt-water-name-river",
+      "type": "symbol",
+      "source": "oceanus",
+      "source-layer": "nt-water-name",
+      "minzoom": 13,
+      "filter": [
+        "==",
+        [
+          "get",
+          "class"
+        ],
+        "river"
+      ],
+      "layout": {
+        "text-font": [
+          "Noto Sans Regular"
+        ],
+        "text-size": 14,
+        "text-field": [
+          "to-string",
+          [
+            "get",
+            "name"
+          ]
+        ],
+        "text-max-width": 5,
+        "text-rotation-alignment": "map",
+        "symbol-placement": "point",
+        "symbol-spacing": 350,
+        "text-letter-spacing": 0.2
+      },
+      "paint": {
+        "text-halo-blur": 1,
+        "text-color": "#FFFFFF",
+        "text-halo-width": 2,
+        "text-halo-color": "#000000"
+      }
+    },
+    {
+      "id": "oc-label-country",
+      "type": "symbol",
+      "source": "oceanus",
+      "source-layer": "oc-label",
+      "maxzoom": 8,
+      "filter": [
+        "==",
+        [
+          "get",
+          "class"
+        ],
+        "country"
+      ],
+      "layout": {
+        "text-font": [
+          "Noto Sans Regular"
+        ],
+        "text-field": "{name}",
+        "text-size": {
+          "stops": [
+            [
+              1,
+              11
+            ],
+            [
+              4,
+              17
+            ]
+          ]
+        },
+        "text-transform": "uppercase",
+        "text-max-width": 6.25,
+        "visibility": "visible"
+      },
+      "paint": {
+        "text-halo-blur": 1,
+        "text-color": "#FFFFFF",
+        "text-halo-width": 2,
+        "text-halo-color": "#000000"
+      }
+    },
+    {
+      "id": "oc-label-pref-ja",
+      "type": "symbol",
+      "source": "oceanus",
+      "source-layer": "oc-label",
+      "minzoom": 5,
+      "maxzoom": 8,
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "get",
+            "class"
+          ],
+          "pref"
+        ],
+        [
+          "has",
+          "jflag"
+        ]
+      ],
+      "layout": {
+        "text-font": [
+          "Noto Sans Regular"
+        ],
+        "text-size": 14,
+        "text-field": "{name}",
+        "text-max-width": 8,
+        "text-offset": [
+          0.4,
+          0
+        ],
+        "icon-size": 0.8,
+        "text-anchor": "left",
+        "visibility": "visible"
+      },
+      "paint": {
+        "text-color": "#FFFFFF",
+        "text-halo-width": 1.2,
+        "text-halo-color": "#000000"
+      }
+    },
+    {
+      "id": "oc-label-pref",
+      "type": "symbol",
+      "source": "oceanus",
+      "source-layer": "oc-label",
+      "minzoom": 5,
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "get",
+            "class"
+          ],
+          "pref"
+        ],
+        [
+          "==",
+          [
+            "has",
+            "jflag"
+          ],
+          false
+        ]
+      ],
+      "layout": {
+        "text-font": [
+          "Noto Sans Regular"
+        ],
+        "text-size": 14,
+        "text-field": "{name}",
+        "text-max-width": 8,
+        "text-offset": [
+          0.4,
+          0
+        ],
+        "icon-size": 0.8,
+        "text-anchor": "left",
+        "visibility": "visible"
+      },
+      "paint": {
+        "text-color": "#FFFFFF",
+        "text-halo-width": 1.2,
+        "text-halo-color": "#000000"
+      }
+    },
+    {
+      "id": "oc-label-town-ja",
+      "type": "symbol",
+      "source": "oceanus",
+      "source-layer": "oc-label",
+      "minzoom": 6,
+      "maxzoom": 8,
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "get",
+            "class"
+          ],
+          "town"
+        ],
+        [
+          "has",
+          "jflag"
+        ]
+      ],
+      "layout": {
+        "text-padding": 2,
+        "text-font": [
+          "Noto Sans Regular"
+        ],
+        "text-anchor": "top",
+        "icon-image": "circle-11",
+        "text-field": [
+          "to-string",
+          [
+            "get",
+            "name"
+          ]
+        ],
+        "text-offset": [
+          0,
+          0.6
+        ],
+        "text-size": 12,
+        "text-max-width": 9
+      },
+      "paint": {
+        "text-color": "#FFFFFF",
+        "text-halo-width": 1.2,
+        "text-halo-color": "#000000"
+      }
+    },
+    {
+      "id": "oc-label-town",
+      "type": "symbol",
+      "source": "oceanus",
+      "source-layer": "oc-label",
+      "minzoom": 6,
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "get",
+            "class"
+          ],
+          "town"
+        ],
+        [
+          "==",
+          [
+            "has",
+            "jflag"
+          ],
+          false
+        ]
+      ],
+      "layout": {
+        "text-padding": 2,
+        "text-font": [
+          "Noto Sans Regular"
+        ],
+        "text-anchor": "top",
+        "icon-image": "circle-11",
+        "text-field": [
+          "to-string",
+          [
+            "get",
+            "name"
+          ]
+        ],
+        "text-offset": [
+          0,
+          0.6
+        ],
+        "text-size": 12,
+        "text-max-width": 9
+      },
+      "paint": {
+        "text-color": "#FFFFFF",
+        "text-halo-width": 1.2,
+        "text-halo-color": "#000000"
       }
     },
     {
@@ -339,18 +904,6 @@
             ]
           ]
         }
-      }
-    },
-    {
-      "id": "water",
-      "type": "fill",
-      "source": "geolonia",
-      "source-layer": "water",
-      "layout": {
-        "visibility": "visible"
-      },
-      "paint": {
-        "fill-color": "rgba(1, 17, 44, 1)"
       }
     },
     {
@@ -687,32 +1240,6 @@
             ]
           ]
         }
-      }
-    },
-    {
-      "id": "ferry",
-      "type": "line",
-      "source": "geolonia",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        [
-          "in",
-          "class",
-          "ferry"
-        ]
-      ],
-      "layout": {
-        "line-join": "round",
-        "visibility": "visible"
-      },
-      "paint": {
-        "line-color": "rgba(108, 159, 182, 1)",
-        "line-width": 1.1,
-        "line-dasharray": [
-          2,
-          2
-        ]
       }
     },
     {
@@ -1996,6 +2523,7 @@
       "type": "line",
       "source": "geolonia",
       "source-layer": "boundary",
+      "minzoom": 8,
       "maxzoom": 14,
       "filter": [
         "all",
@@ -2111,6 +2639,11 @@
         [
           "has",
           "name"
+        ],
+        [
+          "!=",
+          "disputed",
+          "japan_northern_territories"
         ]
       ],
       "layout": {
@@ -2137,9 +2670,17 @@
       "source": "geolonia",
       "source-layer": "water_name",
       "filter": [
-        "==",
-        "$type",
-        "LineString"
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "!=",
+          "disputed",
+          "japan_northern_territories"
+        ]
       ],
       "layout": {
         "text-font": [
@@ -2175,6 +2716,11 @@
           "==",
           "class",
           "ocean"
+        ],
+        [
+          "!=",
+          "disputed",
+          "japan_northern_territories"
         ]
       ],
       "layout": {
@@ -2200,6 +2746,7 @@
       "type": "symbol",
       "source": "geolonia",
       "source-layer": "water_name",
+      "minzoom": 8,
       "filter": [
         "all",
         [
@@ -2211,6 +2758,11 @@
           "!in",
           "class",
           "ocean"
+        ],
+        [
+          "!=",
+          "disputed",
+          "japan_northern_territories"
         ]
       ],
       "layout": {
@@ -2323,6 +2875,11 @@
         [
           "has",
           "name"
+        ],
+        [
+          "!=",
+          "disputed",
+          "japan_northern_territories"
         ]
       ],
       "layout": {
@@ -2385,6 +2942,11 @@
         [
           "has",
           "name"
+        ],
+        [
+          "!=",
+          "disputed",
+          "japan_northern_territories"
         ]
       ],
       "layout": {
@@ -2449,6 +3011,11 @@
           "tertiary",
           "minor",
           "service"
+        ],
+        [
+          "!=",
+          "disputed",
+          "japan_northern_territories"
         ]
       ],
       "layout": {
@@ -2498,6 +3065,11 @@
           "tertiary",
           "minor",
           "service"
+        ],
+        [
+          "!=",
+          "disputed",
+          "japan_northern_territories"
         ]
       ],
       "layout": {
@@ -2537,6 +3109,11 @@
           "<=",
           "ref_length",
           6
+        ],
+        [
+          "!=",
+          "disputed",
+          "japan_northern_territories"
         ]
       ],
       "layout": {
@@ -2581,6 +3158,11 @@
         [
           "has",
           "iata"
+        ],
+        [
+          "!=",
+          "disputed",
+          "japan_northern_territories"
         ]
       ],
       "layout": {
@@ -2614,9 +3196,17 @@
       "source": "geolonia",
       "source-layer": "place",
       "filter": [
-        "==",
-        "class",
-        "village"
+        "all",
+        [
+          "==",
+          "class",
+          "village"
+        ],
+        [
+          "!=",
+          "disputed",
+          "japan_northern_territories"
+        ]
       ],
       "layout": {
         "text-font": [
@@ -2646,14 +3236,71 @@
       }
     },
     {
+      "id": "nt-label-large",
+      "type": "symbol",
+      "source": "oceanus",
+      "source-layer": "nt-label",
+      "minzoom": 13,
+      "filter": [
+        "in",
+        "subclass",
+        "1",
+        "2",
+        "5",
+        "6",
+        "7",
+        "8",
+        "10",
+        "11",
+        "15",
+        "16",
+        "17"
+      ],
+      "layout": {
+        "text-font": [
+          "Noto Sans Regular"
+        ],
+        "text-size": {
+          "base": 1.2,
+          "stops": [
+            [
+              10,
+              12
+            ],
+            [
+              15,
+              22
+            ]
+          ]
+        },
+        "text-field": "{name}",
+        "text-max-width": 8,
+        "visibility": "visible"
+      },
+      "paint": {
+        "text-color": "#333",
+        "text-halo-width": 1.2,
+        "text-halo-color": "rgba(255,255,255,0.8)"
+      }
+    },
+    {
       "id": "place-town",
       "type": "symbol",
       "source": "geolonia",
       "source-layer": "place",
+      "minzoom": 8,
       "filter": [
-        "==",
-        "class",
-        "town"
+        "all",
+        [
+          "==",
+          "class",
+          "town"
+        ],
+        [
+          "!=",
+          "disputed",
+          "japan_northern_territories"
+        ]
       ],
       "layout": {
         "text-font": [
@@ -2686,9 +3333,9 @@
           2
         ],
         [
-          "==",
-          "class",
-          "city"
+          "!=",
+          "disputed",
+          "japan_northern_territories"
         ]
       ],
       "layout": {
@@ -2711,6 +3358,7 @@
       "type": "symbol",
       "source": "geolonia",
       "source-layer": "place",
+      "minzoom": 8,
       "filter": [
         "all",
         [
@@ -2722,6 +3370,11 @@
           "==",
           "class",
           "city"
+        ],
+        [
+          "!=",
+          "disputed",
+          "japan_northern_territories"
         ]
       ],
       "layout": {
@@ -2743,47 +3396,6 @@
       "paint": {
         "text-color": "#FFFFFF",
         "text-halo-width": 1.2,
-        "text-halo-color": "#000000"
-      }
-    },
-    {
-      "id": "place-country",
-      "type": "symbol",
-      "source": "geolonia",
-      "source-layer": "place",
-      "filter": [
-        "all",
-        [
-          "==",
-          "class",
-          "country"
-        ]
-      ],
-      "layout": {
-        "text-font": [
-          "Noto Sans Regular"
-        ],
-        "text-field": "{name}",
-        "text-size": {
-          "stops": [
-            [
-              1,
-              11
-            ],
-            [
-              4,
-              17
-            ]
-          ]
-        },
-        "text-transform": "uppercase",
-        "text-max-width": 6.25,
-        "visibility": "visible"
-      },
-      "paint": {
-        "text-halo-blur": 1,
-        "text-color": "#FFFFFF",
-        "text-halo-width": 2,
         "text-halo-color": "#000000"
       }
     },
