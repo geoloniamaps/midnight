@@ -1,6 +1,5 @@
 version: 8
 name: Geolonia Midnight
-metadata: {}
 sources:
   geolonia:
     type: vector
@@ -80,4 +79,3 @@ layers:
   - !!inc/file layers/place-city-capital.yml
   - !!inc/file layers/place-country.yml
   - !!inc/file layers/place-continent.yml
-id: geolonia-midnight
