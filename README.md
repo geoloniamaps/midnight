@@ -1,25 +1,27 @@
 # Midnight
 
-This is a Mapbox GL JS based style for [Geolonia](https://geolonia.com/).
+* [DEMO](https://geoloniamaps.github.io/midnight)
+* [DEMO on editor](https://editor.geolonia.com/?style=https://geoloniamaps.github.io/midnight/style.json)
 
-* [DEMO](https://geolonia.github.io/preview/#geolonia/midnight)
-* [DEMO on editor](https://editor.geolonia.com/?style=https://raw.githubusercontent.com/geolonia/midnight/master/style.json)
+## ユーザーがカスタマイズする際の手順
 
-## Development
-
-### Installs the Maputnik CLI
-
-https://github.com/maputnik/editor/wiki/Maputnik-CLI
+* [Use this template](https://github.com/geoloniamaps/midnight/generate) ボタンでこのリポジトリをコピー。
+* `style.yml` を編集。
+* しばらくすると `gh-pages` ブランチに `style.json` がコミットされるので、Geolonia Maps で表示する場合は、その URL を以下のように指定してください。
 
 ```
-$ curl -L https://github.com/maputnik/editor/releases/download/v1.6.1/maputnik_darwin -o /usr/local/bin/maputnik
-$ chmod 755 /usr/local/bin/maputnik
+<div data-style="https://<あなたのGitHubユーザー名>.github.io/<リポジトリ名>/style.json"></div>
 ```
 
-### Start up the Maputnik App
+例: https://codepen.io/naogify/pen/ZEJOErQ
+
+
+## 色のカスタマイズ
+
+[style.yml](./style.yml) を開いて下さい。 以下をお好きな色のカラーコードに変更しコミットして下さい。
 
 ```
-maputnik --watch --file ./style.json
-```
+$background: rgba(254, 254, 254, 1)
 
-Then access the Maputnik editor GUI at [localhost:8000](https://localhost:8000/).
+# カスタマイズここまで
+```
