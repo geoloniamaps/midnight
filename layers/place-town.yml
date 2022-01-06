@@ -1,0 +1,21 @@
+id: place-town
+type: symbol
+source: geolonia
+source-layer: place
+filter:
+  - '=='
+  - class
+  - town
+layout:
+  text-font:
+    - Noto Sans Regular
+  text-size: 14
+  text-field: '{name}'
+  text-max-width: 8
+  visibility: visible
+paint:
+  text-color: '#FFFFFF'
+  text-halo-width: 1.2
+  text-halo-color: '#000000'
+  icon-halo-color: rgba(18, 14, 14, 0)
+  icon-color: rgba(255, 255, 255, 1)
