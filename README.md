@@ -11,6 +11,7 @@
 ## ユーザーがカスタマイズする際の手順
 
 * [Use this template](https://github.com/geoloniamaps/midnight/generate) ボタンでこのリポジトリをコピー。
+* GitHub Pages を設定。
 * `style.yml` を編集。
 * しばらくすると `gh-pages` ブランチに `style.json` がコミットされるので、Geolonia Maps で表示する場合は、その URL を以下のように指定してください。
 
