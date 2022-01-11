@@ -1,5 +1,10 @@
 # Midnight
 
+このリポジトリは、Geolonia の [Midnight スタイル](https://geoloniamaps.github.io/midnight)をカスタマイズし公開するためのテンプレートリポジトリです。
+
+以下のような簡単な手順でお好みのスタイルにカスタマイズし、地図として表示できます。
+
+
 * [DEMO](https://geoloniamaps.github.io/midnight)
 * [DEMO on editor](https://editor.geolonia.com/?style=https://geoloniamaps.github.io/midnight/style.json)
 
@@ -15,6 +20,13 @@
 
 例: https://codepen.io/naogify/pen/ZEJOErQ
 
+
+## GitHub Pages の設定方法
+
+* GitHub のリポジトリのメニューの中にある [Settings] をクリックしてください。
+* 移動先のページの下の方にある [GitHub Pages] のところで、以下のように設定してください。
+
+![](https://www.evernote.com/l/ABXqA26fEitDNZG6KDxX-Os6Qb8gciGRKSYB/image.png)
 
 ## 色のカスタマイズ
 
