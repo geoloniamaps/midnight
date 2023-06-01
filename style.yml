@@ -3,7 +3,7 @@ name: Geolonia Midnight
 sources:
   geolonia:
     type: vector
-    url: https://api.geolonia.com/v1/sources?key=YOUR-API-KEY
+    url: https://tileserver.geolonia.com/v3/tiles.json?key=YOUR-API-KEY
 sprite: https://sprites.geolonia.com/basic-white
 glyphs: https://glyphs.geolonia.com/{fontstack}/{range}.pbf
 layers:
